@@ -14,3 +14,9 @@ class ContactAdmin(admin.ModelAdmin):
     list_display_links = 'id', 'first_name', 'last_name',
     # list_editable = 'last_name'
     # list_filter = ('created_date',)
+
+
+@admin.register(models.Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    ordering = ('id', 'name')
