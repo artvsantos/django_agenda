@@ -1,10 +1,17 @@
 from django.shortcuts import render
 
-# Create your views here.
+from contact.models import Contact
 
 
 def index(request):
+    contacts = Contact.objects.filter(show=True).order_by('-id')
+
+    contexto = {
+        'contacts': contacts,
+    }
+
     return render(
         request,
         'contact/index.html',
+        context=contexto
     )
