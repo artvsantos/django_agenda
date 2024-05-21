@@ -6,6 +6,9 @@ from contact.models import Contact
 
 
 def create(request):
+    if request.method == 'POST':
+        search = request.POST.get('first_name')
+
     context = {
 
     }
@@ -13,5 +16,5 @@ def create(request):
     return render(
         request,
         'contact/create.html',
-        # context
+        context
     )
