@@ -40,13 +40,29 @@ class ContactForm(forms.ModelForm):
 
     def clean(self):
         cleaned_data = self.cleaned_data
+        first_name = cleaned_data.get('first_name')
+        last_name = cleaned_data.get('last_name')
 
-        self.add_error(
-            None,
-            ValidationError(
-                'Mensagem de erro',
+        if first_name == last_name:
+            msg = ValidationError(
+                'Primeiro nome não pode ser igual ao segundo',
                 code='invalid'
             )
-        )
+            self.add_error('first_name', msg)
+            self.add_error('last_name', msg)
 
         return super().clean()
+
+    def clear_first_name(self):
+        cleaned_data = self.cleaned_data.get('first_name')
+
+        if cleaned_data == 'ABC':
+            self.add_error(
+                'first_name',
+                ValidationError(
+                    'não digite ABC',
+                    code='invalid'
+                )
+            )
+
+        return cleaned_data
