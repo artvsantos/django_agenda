@@ -1,9 +1,11 @@
 from django.shortcuts import redirect, render
+from django.urls import reverse
 
 from contact.forms import ContactForm
 
 
 def create(request):
+    form_action = reverse('contact:create')
     if request.method == 'POST':
         form = ContactForm(request.POST)
 
