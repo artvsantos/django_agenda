@@ -39,7 +39,7 @@ def create(request):
 
 def update(request, contact_id):
     contact = get_object_or_404(
-        Contact, contact_id, show=True
+        Contact, pk=contact_id, show=True
     )
     form_action = reverse('contact:update', args=(contact_id,))
 
@@ -62,7 +62,7 @@ def update(request, contact_id):
         )
 
     context = {
-        'form': ContactForm(),
+        'form': ContactForm(instance=contact),
         'form_action': form_action,
     }
 
